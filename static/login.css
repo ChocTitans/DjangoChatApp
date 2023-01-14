@@ -1,0 +1,149 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(#33B993, #3B5BA8);
+    background-size: 1920px 755px;
+    background-repeat: no-repeat;
+  }
+  
+  
+  ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      
+    }
+  
+    li {
+      float: right;  
+    }
+    
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+      text-decoration: none;
+      font-size:25px;
+      margin-top: 50px;
+      margin-right: 80px;
+      
+    }
+    
+    li a:hover {
+      background-color: #33B993;
+      border:4px solid #33B993;
+    }
+    .img2{ 
+      width : 221px;
+      height : 115px;
+      padding: 20px 40px;
+    }
+    
+    /* Bordered form */
+  form{
+      margin-top: -50px;
+  }
+  /* Full-width inputs */
+  input[type=text], input[type=password] {
+    width: 40%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  margin-right: auto;
+  margin-left: auto;
+  }
+  
+  /* Set a style for all buttons */
+  button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 10px 435px;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+    text-align: center;
+  }
+  
+  /* Add a hover effect for buttons */
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  /* Extra style for the cancel button (red) */
+  .cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+  }
+  
+  /* Center the avatar image inside this container */
+  .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+  }
+  
+  /* Avatar image */
+  img.avatar {
+    width: 15%;
+    border-radius: 50%;
+    margin-bottom: -20px;
+  }
+  
+  /* Add padding to containers */
+  .container {
+    margin-bottom: -30px;
+    padding: 16px;
+    background-color: transparent;
+  }
+  
+  /* The "Forgot password" text */
+  span.psw {
+    float: right;
+    padding-top: 16px;
+    font-weight: bold;
+    color: white;
+  }
+  span.psw1 {
+    float: left;
+    padding-top: 16px;
+    font-weight: bold;
+    color: white;
+  }
+  span a{
+      color: black
+  }
+#im1{
+    font-size: 25px;
+    margin-left: 435px;
+    
+}
+.label{
+    text-align:justify;
+}
+.labelo{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size:20px;
+}
+#hello{
+  text-align: center;
+    color: #75151e;
+    font-weight: bold;
+    font-size:20px;
+
+}
+  /* Change styles for span and cancel button on extra small screens */
+  @media screen and (max-width: 300px) {
+    span.psw {
+      display: block;
+      float: none;
+    }
+    .cancelbtn {
+      width: 100%;
+    }
+  }

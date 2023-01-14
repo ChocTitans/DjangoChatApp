@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        E-Sondage
+    </title>
+ {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'utilisateur.css' %}">
+</head>
+<body>
+<div class="navbar">
+    <ul >
+        <img src="{% static 'logo.png' %}" alt="My image2" class="img2">
+        <li><a href="">Contact</a></li>
+        <li><a href="{% url 'store' 1 %}">Magasin</a></li>
+        <li><a href="{% url 'render_poll' %}">Sondage</a></li>
+        <li><a href="">A propos</a></li>
+        <li><a href="{% url 'home' %}">Acceuil</a></li>
+    </ul>
+
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{%csrf_token %}
+<div class="card">
+  <img src="{% static 'img_profile.png' %}" alt="John" style="width:100%">
+  <h1>Pseudo:  </h1 > <h2>{{user.username}}</h2>
+  <h1>Nom: </h1> <h2>{{user.last_name}}</h2>
+  <h1>Prenom: </h1> <h2>{{user.first_name}}</h2>
+  <h1>Email:</h1> <h2>{{user.email}} </h2>
+  <h1>Nombre de Point: </h1> <h2>{{user.point}}  </h2>
+  <a id="deco"href="{% url 'deco' %}"> Deconnecter </a>
+
+</div>

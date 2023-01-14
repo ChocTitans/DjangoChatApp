@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile</title>
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/dist/css/style.css' %}">
+	<script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% include 'core2/header.html' %}
+
+	<link rel="stylesheet" href="{% static 'tables/css/style.css' %}">
+</head>
+<body class="is-boxed has-animations">
+    <div class="body-wrap">
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header-inner">
+                    <div class="brand header-brand">
+                        <h1 class="m-0">
+							<a href="{% url 'home' %}">
+								<img class="header-logo-image" src="{% static 'dist/images/logo.svg' %}" alt="Logo">
+                            </a>
+
+                        </h1>
+
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <main>
+
+            <section class="hero">
+                <div class="container">
+
+                    <div class="hero-inner">
+
+						<div class="hero-copy">
+                               Salon : {{ room.name }}
+
+                                <div class="pricing-table" style="padding:13px;width:1000px;max-width:1000px;">
+                                    <div class="pricing-table-inner is-revealing">
+                                        <div class="pricing-table-main">
+                                            <div class="chat-messages space-y-9 bg-grey rounded" id="chat-messages">
+                                                {% for m in messages %}<b>{{ m.user.username }}</b>: {{ m.content }}<br>{% endfor %}
+                                            </div>
+                                            <div class="pricing-table-header pb-32">
+                                                <div class="pricing-table-price"><span class="pricing-table-price-currency h2"></span><span class="pricing-table-price-amount h1" style="color: dodgerblue"></span></div>
+                                            </div>
+    
+                                            <form method="post" action="." class="">
+
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control rounded-left" name="content" placeholder="Ton message" id="chat-message-input" required>
+                                                </div>
+                                                <div class="pricing-table-cta mb-2">
+                                                    <button type="submit" class="button button-primary button-shadow button-block" id="chat-message-submit" >Envoyer</button>
+                                                </div>
+                                                
+                                            </form>
+
+                                            
+    
+                                        </div>
+                                    </div>
+                                </div>
+						</div>
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="{% static 'dist/js/main.min.js' %}"></script>
+</body>
+</html>
+
+
+{% block scripts %}
+{{ room.slug|json_script:"json-roomname" }}
+{{ request.user.username|json_script:"json-username" }}
+
+<script>
+    const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
+    const userName = JSON.parse(document.getElementById('json-username').textContent);
+    const chatSocket = new WebSocket(
+        'ws://'
+        + window.location.host
+        + '/ws/'
+        + roomName
+        + '/'
+    );
+
+    chatSocket.onclose = function(e) {
+        console.log('onclose')
+    }
+
+    chatSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+
+        if (data.message) {
+            document.querySelector('#chat-messages').innerHTML += ('<b>' + data.username + '</b>: ' + data.message + '<br>');
+        } 
+
+        scrollToBottom();
+    };
+
+    document.querySelector('#chat-message-input').focus();
+    document.querySelector('#chat-message-input').onkeyup = function(e) {
+        if (e.keyCode === 13) {
+            document.querySelector('#chat-message-submit').click();
+        }
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function(e) {
+        e.preventDefault()
+
+        const messageInputDom = document.querySelector('#chat-message-input');
+        const message = messageInputDom.value;
+
+        console.log({
+            'message': message,
+            'username': userName,
+            'room': roomName
+        })
+
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'username': userName,
+            'room': roomName
+        }));
+
+        messageInputDom.value = '';
+
+        return false
+    };
+
+    /**
+    * A function for finding the messages element, and scroll to the bottom of it.
+    */
+    function scrollToBottom() {
+        let objDiv = document.getElementById("chat-messages");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
+
+    // Add this below the function to trigger the scroll on load.
+    scrollToBottom();
+</script>
+{% endblock %}

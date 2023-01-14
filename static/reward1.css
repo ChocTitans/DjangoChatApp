@@ -1,0 +1,49 @@
+
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(#33B993, #3B5BA8);
+    background-size: 1920px 755px;
+    background-repeat: no-repeat;
+  }
+  
+  
+  ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      
+    }
+  
+    li {
+      float: right;  
+    }
+  
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 30px 10px;
+      text-decoration: none;
+      font-size:25px;
+      margin-top: 50px;
+      margin-right: 80px;
+      
+    }
+  
+    li a:hover {
+      background-color: #33B993;
+      border:4px solid #33B993;
+    }
+    .img2{ 
+      width : 221px;
+      height : 115px;
+      padding: 20px 40px;
+    }
+    .message {
+        text-align: center;
+        font-size:50px;
+        margin-top:200px;
+
+    }

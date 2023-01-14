@@ -1,0 +1,96 @@
+
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile</title>
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/dist/css/style.css' %}">
+	<script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% include 'core2/header.html' %}
+
+	<link rel="stylesheet" href="{% static 'tables/css/style.css' %}">
+</head>
+<body class="is-boxed has-animations">
+    <div class="body-wrap">
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header-inner">
+                    <div class="brand header-brand">
+                        <h1 class="m-0">
+							<a href="{% url 'home' %}">
+								<img class="header-logo-image" src="{% static 'dist/images/logo.svg' %}" alt="Logo">
+                            </a>
+
+                        </h1>
+
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <main>
+
+            <section class="hero">
+
+                <div class="container">
+
+                    <div class="hero-inner">
+
+                        <div class="hero-copy">
+                                Création du Salon
+                            <div class="pricing-table" style="padding:13px;width:1000px;max-width:1000px;">
+                                <div class="pricing-table-inner is-revealing">
+
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <input type="text" class="form-control rounded-left" name="name" placeholder="Nom du Salon" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control rounded-left" name="slug" placeholder="Slogan du Salon" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button type="submit" class="button button-primary button-shadow button-block">Créer</button>
+                                        </div>
+
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="{% static 'dist/js/main.min.js' %}"></script>
+</body>
+</html>
+
+
+
+
+
+<form method="post">
+    {% csrf_token %}
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="">
+    <label for="slug">Slug:</label>
+    <input type="text" id="slug" name="slug" value="">
+    <input type="submit" value="Save">
+</form>
