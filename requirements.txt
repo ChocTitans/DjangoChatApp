@@ -1,1 +1,8 @@
+gunicorn
+django
+channels==3.0.5
+Django==4.1.1
+django-crispy-forms==1.14.0
+emoji==2.2.0
+whitenoise==6.3.0
 
